@@ -12,12 +12,12 @@ import {
   HiOutlineTrash,
 } from 'react-icons/hi';
 import { Button } from './ui/button';
-
-import { useAppSelector, useAppDispatch } from '@/redux/hooks';
+import { IProduct } from '@/types/globalTypes';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import {
   addToCart,
   removeFromCart,
-  removeOneFromCart,
+  removeOne,
 } from '@/redux/features/cart/cartSlice';
 
 export default function Cart() {
@@ -57,7 +57,7 @@ export default function Cart() {
                 <Button onClick={() => dispatch(addToCart(product))}>
                   <HiOutlinePlus size="20" />
                 </Button>
-                <Button onClick={() => dispatch(removeOneFromCart(product))}>
+                <Button onClick={() => dispatch(removeOne(product))}>
                   <HiMinus size="20" />
                 </Button>
                 <Button

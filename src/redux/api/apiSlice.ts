@@ -1,18 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const apiSlice = createApi({
+export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000',
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => '/products',
     }),
-    getSingleProduct: builder.query({
+    singleProduct: builder.query({
       query: (id) => `/product/${id}`,
+    }),
+    getComments: builder.query({
+      query: (id) => `/comment/${id}`,
+    }),
+    postComment: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/comment/${id}`,
+        method: 'POST',
+        body: data,
+      }),
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = apiSlice;
+export const {
+  useGetProductsQuery,
+  useSingleProductQuery,
+  usePostCommentMutation,
+  useGetCommentsQuery,
+} = api;
